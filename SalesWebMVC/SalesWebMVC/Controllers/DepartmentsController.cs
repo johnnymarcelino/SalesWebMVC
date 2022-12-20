@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using SalesWebMVC.Models;
 using SalesWebMVC.Models.ViewModels;
 
-namespace SalesWebMvc.Controllers
+namespace SalesWebMVC.Controllers
 {
     public class DepartmentsController : Controller
     {

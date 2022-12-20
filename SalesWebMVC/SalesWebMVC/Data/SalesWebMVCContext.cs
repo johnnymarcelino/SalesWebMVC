@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using SalesWebMVC.Models;
+using SalesWebMVC;
 
-namespace SalesWebMvc.Models
+namespace SalesWebMVC.Models
 {
     public class SalesWebMVCContext : DbContext
     {
@@ -13,6 +15,6 @@ namespace SalesWebMvc.Models
         {
         }
 
-        public DbSet<SalesWebMvc.Models.Department> Department { get; set; }
+        public DbSet<SalesWebMVC.Models.Department> Department { get; set; }
     }
 }
