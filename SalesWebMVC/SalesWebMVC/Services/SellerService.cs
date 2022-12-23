@@ -6,7 +6,7 @@ namespace SalesWebMVC.Services
 {
     public class SellerService
     {
-        private readonly SalesWebMVCContext _context;  // previne que a dependencia nao seja alterada
+        private readonly SalesWebMVCContext _context;  // readonly previne que a dependencia nao seja alterada
 
         public SellerService(SalesWebMVCContext context)
         {
@@ -17,5 +17,12 @@ namespace SalesWebMVC.Services
         {
             return _context.Sellers.ToList();
         }
+
+        public void Insert(Seller obj)
+        {
+            _context.Add(obj);
+            _context.SaveChanges();
+        }
+
     }
 }
