@@ -1,4 +1,6 @@
-﻿using SalesWebMVC.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using SalesWebMVC.Models;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -22,6 +24,18 @@ namespace SalesWebMVC.Services
         {
             _context.Add(obj);
             _context.SaveChanges();
+        }
+
+        public Seller FindById(int id)
+        {
+            return _context.Sellers.FirstOrDefault(obj => obj.Id == id);
+        }
+
+        public void Remove(int id)
+        {
+            var obj = _context.Sellers.Find(id);
+            _context.Sellers.Remove(obj);
+            _context.SaveChanges();  // entityframework confirmar no banco de dados
         }
     }
 }
