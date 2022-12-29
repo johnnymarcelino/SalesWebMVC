@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Newtonsoft.Json.Schema;
 using SalesWebMVC.Models;
 using SalesWebMVC.Models.ViewModels;
 using SalesWebMVC.Services;
+using SalesWebMVC.Services.Exceptions;
+using System.Collections.Generic;
 
 namespace SalesWebMVC.Controllers
 {
@@ -80,6 +83,48 @@ namespace SalesWebMVC.Controllers
 
             return View(obj);
         }
-    }
+
+        public IActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var obj = _sellerService.FindById(id.Value);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+
+            List<Department> departments = _departmentService.FindAll();
+            SellerFormViewModel ViewModel = new SellerFormViewModel { Seller = obj, Departments = departments };
+            return View(ViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id, Seller seller)
+        {
+            if (id != seller.Id)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                _sellerService.Update(seller);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (NotFoundException)
+            {
+                return NotFound();
+            }
+            catch (DbConcurrencyException)
+            {
+                return BadRequest();
+            }
+        }
+
     }
 }
