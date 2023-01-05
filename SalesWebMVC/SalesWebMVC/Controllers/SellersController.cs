@@ -6,6 +6,7 @@ using SalesWebMVC.Models;
 using SalesWebMVC.Models.ViewModels;
 using SalesWebMVC.Services;
 using SalesWebMVC.Services.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
@@ -110,7 +111,7 @@ namespace SalesWebMVC.Controllers
         {
             if (id != seller.Id)
             {
-                return BadRequest();
+                return RedirectToAction(nameof(Error), new { message = "Id mismatch" });
             }
 
             try
@@ -118,14 +119,14 @@ namespace SalesWebMVC.Controllers
                 _sellerService.Update(seller);
                 return RedirectToAction(nameof(Index));
             }
-            catch (NotFoundException)
+            catch (ApplicationException e)  // ApplicationException super titulo de NotFoundException e DbConcurrencyException (upcasting das duas)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = e.Message });
             }
-            catch (DbConcurrencyException)
-            {
-                return BadRequest();
-            }
+            //catch (DbConcurrencyException e)
+            //{
+            //    return RedirectToAction(nameof(Error), new { message = e.Message });
+            //}
         }
 
         public IActionResult Error(string message)
