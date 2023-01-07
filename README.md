@@ -1,2 +1,2 @@
 # SalesWebMVC
-A complete project Web in ASP.NET CORE Framework 
+A complete project Web ASP.NET CORE Framework 
