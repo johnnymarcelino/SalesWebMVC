@@ -1,11 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.VisualStudio.Web.CodeGeneration.Contracts.Messaging;
-using Newtonsoft.Json.Schema;
 using SalesWebMVC.Models;
 using SalesWebMVC.Models.ViewModels;
 using SalesWebMVC.Services;
-using SalesWebMVC.Services.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -151,6 +147,5 @@ namespace SalesWebMVC.Controllers
             };
             return View(viewModel);
         }
-
     }
 }
