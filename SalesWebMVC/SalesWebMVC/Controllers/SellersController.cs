@@ -76,7 +76,8 @@ namespace SalesWebMVC.Controllers
             }
             catch (IntegrityException e)
             {
-                return RedirectToAction(nameof(Error), new { message = e.Message});
+                throw new IntegrityException("Can't delete seller cause he/she has sales");
+                //return RedirectToAction(nameof(Error), new { message = e.Message}); in case just message error
             }
         }
 
