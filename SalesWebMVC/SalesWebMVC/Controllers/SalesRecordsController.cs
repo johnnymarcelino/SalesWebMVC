@@ -1,15 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SalesWebMVC.Services;
+using System;
+using System.Threading.Tasks;
 
 namespace SalesWebMVC.Controllers
 {
     public class SalesRecordsController : Controller
     {
+
+        private readonly SalesRecordService _salesRecordService;
+
+        public SalesRecordsController(SalesRecordService salesRecordService)
+        {
+            _salesRecordService = salesRecordService;
+        }
+
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult SimpleSearch()
+        public async Task<IActionResult> SimpleSearch(DateTime? minDate, DateTime? maxDate)
         {
             return View();
         }
