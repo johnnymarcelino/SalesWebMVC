@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using System.Linq;
+
 
 namespace SalesWebMVC.Services
 {
@@ -14,7 +16,7 @@ namespace SalesWebMVC.Services
         {
             _context = context;
         }
-
+        
         public async Task<List<SalesRecord>> FindByDateAsync(DateTime? minDate, DateTime? maxDate)
         {
             var result = from obj in _context.SalesRecords select obj;
@@ -28,8 +30,8 @@ namespace SalesWebMVC.Services
             }
             return await result
                 .Include(x => x.Seller)
-                .Include(x => x.Department)
-                .OderByDescending(x => x.Date)
+                .Include(x => x.Seller.Department)
+                .OrderByDescending(x => x.Date)
                 .ToListAsync();
         }
     }
