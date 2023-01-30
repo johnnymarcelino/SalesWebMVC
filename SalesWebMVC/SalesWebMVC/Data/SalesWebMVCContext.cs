@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using SalesWebMVC.Models;
 using SalesWebMVC;
 
+
 namespace SalesWebMVC.Models
 {
     public class SalesWebMVCContext : DbContext
@@ -17,6 +18,6 @@ namespace SalesWebMVC.Models
 
         public DbSet<Department> Department { get; set; }
         public DbSet<Seller> Sellers { get; set; }
-        public DbSet<SalesRecord> SalesRecords { get; set; }
+        public DbSet<SalesRecord> SalesRecord { get; set; }
     }
 }

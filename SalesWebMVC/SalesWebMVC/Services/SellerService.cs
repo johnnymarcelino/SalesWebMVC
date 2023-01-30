@@ -3,6 +3,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SalesWebMVC.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 using Microsoft.EntityFrameworkCore;
 using SalesWebMVC.Services.Exceptions;
 using System.Threading.Tasks;
@@ -44,7 +45,7 @@ namespace SalesWebMVC.Services
             }
             catch (DbUpdateException e)
             {
-                throw new IntegrityException(e.Message);
+                throw new IntegrityException("Can't delete seller because he/she has sales");
             }
         }
 
