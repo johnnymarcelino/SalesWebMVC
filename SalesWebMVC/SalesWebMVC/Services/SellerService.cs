@@ -1,12 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using SalesWebMVC.Models;
+﻿using SalesWebMVC.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SalesWebMVC.Services.Exceptions;
-using System.Threading.Tasks;
 
 namespace SalesWebMVC.Services
 {
@@ -21,7 +19,7 @@ namespace SalesWebMVC.Services
 
         public async Task<List<Seller>> FindAllAsync()
         {
-            return await _context.Sellers.ToListAsync();
+            return await _context.Seller.ToListAsync();
         }
 
         public async Task InsertAsync(Seller obj)
@@ -32,15 +30,15 @@ namespace SalesWebMVC.Services
 
         public async Task<Seller> FindByIdAsync(int id)
         {
-            return await _context.Sellers.Include(obj => obj.Department).FirstOrDefaultAsync(obj => obj.Id == id);
+            return await _context.Seller.Include(obj => obj.Department).FirstOrDefaultAsync(obj => obj.Id == id);
         }
 
         public async Task RemoveAsync(int id)
         {
             try
             {
-                var obj = await _context.Sellers.FindAsync(id);
-                _context.Sellers.Remove(obj);
+                var obj = await _context.Seller.FindAsync(id);
+                _context.Seller.Remove(obj);
                 await _context.SaveChangesAsync();  // entityframework confirmar no banco de dados
             }
             catch (DbUpdateException e)
@@ -51,7 +49,7 @@ namespace SalesWebMVC.Services
 
         public async Task UpdateAsync(Seller obj)
         {
-            bool hasAny = await _context.Sellers.AnyAsync(x => x.Id == obj.Id);
+            bool hasAny = await _context.Seller.AnyAsync(x => x.Id == obj.Id);
             if (!hasAny)
             {
                 throw new NotFoundException("Id not found");

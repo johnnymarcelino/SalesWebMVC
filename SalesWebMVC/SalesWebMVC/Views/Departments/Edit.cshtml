@@ -1,5 +1,4 @@
-﻿
-@model SalesWebMVC.Models.Department
+﻿@model SalesWebMVC.Models.Department
 @{
     ViewData["Title"] = "Edit";
 }
@@ -30,7 +29,5 @@
 </div>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-    }
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

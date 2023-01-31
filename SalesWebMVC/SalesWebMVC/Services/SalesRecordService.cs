@@ -4,17 +4,15 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using System.Linq;
-using System.ComponentModel.DataAnnotations;
-using SalesWebMVC.Models.Enums;
 
 
 namespace SalesWebMVC.Services
 {
-    public class SalesRecordsService
+    public class SalesRecordService
     {
         private readonly SalesWebMVCContext _context;
 
-        public SalesRecordsService(SalesWebMVCContext context)
+        public SalesRecordService(SalesWebMVCContext context)
         {
             _context = context;
         }
@@ -37,7 +35,7 @@ namespace SalesWebMVC.Services
                 .ToListAsync();
         }
 
-        public async Task<List<IGrouping<Department, SalesRecord>>> FindByDateGroupingAsync(DateTime? minDate, DateTime? maxDate)
+        public async Task<List<IGrouping<Department,SalesRecord>>> FindByDateGroupingAsync(DateTime? minDate, DateTime? maxDate)
         {
             var result = from obj in _context.SalesRecord select obj;
             if (minDate.HasValue)
